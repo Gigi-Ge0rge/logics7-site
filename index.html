@@ -3,245 +3,254 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logics7 — Ваш продуктовый оператор</title>
-    <!-- Подключаем Tailwind CSS для быстрой и стильной верстки -->
+    <title>Logics7 | Продуктовый оператор</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: { sans: ['Inter', 'sans-serif'] },
-                    colors: { primary: '#0f172a', accent: '#3b82f6' }
+                    colors: { 
+                        brand: { black: '#0a0a0a', white: '#ffffff', gray: '#1a1a1a', light: '#f5f5f5' }
+                    }
                 }
             }
         }
     </script>
     <style>
-        /* Стилизация нативных аккордеонов */
+        /* Премиальная анимация аккордеонов */
         details > summary { list-style: none; cursor: pointer; }
         details > summary::-webkit-details-marker { display: none; }
-        details[open] summary ~ * { animation: sweep .3s ease-in-out; }
-        @keyframes sweep {
-            0%    {opacity: 0; margin-top: -10px;}
-            100%  {opacity: 1; margin-top: 0px;}
+        details[open] summary ~ * { animation: slideDown 0.4s ease-in-out; }
+        @keyframes slideDown {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
-        .accordion-icon { transition: transform 0.3s; }
-        details[open] summary .accordion-icon { transform: rotate(45deg); }
+        .accordion-icon { transition: transform 0.3s ease; }
+        details[open] > summary > .accordion-icon { transform: rotate(180deg); }
     </style>
 </head>
-<body class="font-sans bg-gray-50 text-gray-900 antialiased selection:bg-accent selection:text-white">
+<body class="font-sans bg-brand-light text-brand-black antialiased selection:bg-brand-black selection:text-white">
 
     <!-- Навигация -->
-    <nav class="fixed w-full bg-primary/90 backdrop-blur-sm z-50 text-white">
-        <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-2xl font-bold tracking-tighter">LOGICS<span class="text-accent">7</span></div>
-            <a href="#contact" class="hidden md:inline-block border border-white/30 hover:border-white px-5 py-2 rounded transition">Написать нам</a>
+    <nav class="fixed w-full bg-brand-light/90 backdrop-blur-md z-50 border-b border-gray-200">
+        <div class="max-w-6xl mx-auto px-6 py-5 flex justify-between items-center">
+            <div class="text-2xl font-bold tracking-tight">Logics7</div>
+            <a href="#contact" class="text-sm font-medium border-b border-brand-black pb-1 hover:text-gray-600 hover:border-gray-600 transition">Написать нам</a>
         </div>
     </nav>
 
-    <!-- Экран 1: Hero Section -->
-    <section class="bg-primary text-white pt-32 pb-20 px-6">
-        <div class="max-w-5xl mx-auto mt-10">
-            <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-6">
-                Мы берем на себя вашу <br class="hidden md:block" />
-                <span class="text-accent">IT-разработку</span>
-            </h1>
-            <p class="text-lg md:text-xl text-gray-300 mb-2 font-semibold">От идеи до стабильной работы в продакшене.</p>
-            <p class="text-base md:text-lg text-gray-400 mb-10 max-w-2xl">
-                Logics7 — ваш продуктовый оператор. Мы проверяем, строим и ведем цифровые продукты и бизнес-системы. Никакой разработки без продуктовой и коммерческой логики.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4">
-                <a href="#contact" class="bg-accent hover:bg-blue-600 text-white font-semibold py-4 px-8 rounded-lg text-center transition">
-                    Начать разговор
-                </a>
-                <a href="#" class="bg-white/10 hover:bg-white/20 text-white font-semibold py-4 px-8 rounded-lg text-center transition">
-                    Смотреть питч-дек (PDF)
-                </a>
+    <!-- Экран 1: Hero (Для CEO) -->
+    <section class="pt-40 pb-20 px-6 max-w-6xl mx-auto">
+        <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-8 tracking-tight">
+            Цифровые продукты и бизнес-системы, <br class="hidden md:block">
+            <span class="text-gray-500">созданные для работы после запуска.</span>
+        </h1>
+        <p class="text-xl md:text-2xl font-medium max-w-3xl mb-12">
+            Logics7 — продуктовый оператор. Мы проверяем, структурируем, строим, запускаем и ведём. Никакой разработки без продуктовой логики.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-6">
+            <a href="#contact" class="bg-brand-black text-white px-8 py-4 text-center font-medium hover:bg-gray-800 transition">
+                Начать разговор →
+            </a>
+        </div>
+    </section>
+
+    <!-- Экран 2: Статус (Коротко) -->
+    <section class="py-16 bg-brand-black text-white px-6">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            <div>
+                <h2 class="text-2xl font-bold mb-4">Нам доверяют в регулируемых и высоконагруженных средах.</h2>
+                <p class="text-gray-400">Мы не продаем изолированные "часы разработчиков". Мы берем на себя операционную ответственность.</p>
+            </div>
+            <div class="space-y-4 text-gray-300 border-l border-gray-800 pl-6">
+                <p>— Платформы для иммиграционных сервисов (SRA-регулируемые юр. фирмы).</p>
+                <p>— Автоматизация кредитования (FinTech, кейс NeoFin).</p>
+                <p>— Платформы военной симуляции (L7 Simulators), <strong class="text-white">получившие кодификацию NATO в 2024 году.</strong></p>
             </div>
         </div>
     </section>
 
-    <!-- Экран 2: Social Proof -->
-    <section class="py-12 bg-gray-900 text-white border-y border-gray-800 px-6">
-        <div class="max-w-5xl mx-auto text-center">
-            <h2 class="text-xl md:text-2xl font-semibold mb-6">Нам доверяют там, где ошибки стоят дорого.</h2>
-            <p class="text-gray-400 text-sm md:text-base max-w-3xl mx-auto leading-relaxed">
-                Наши системы работают в FinTech, LegalTech, иммиграционных сервисах, а наши профессиональные платформы военной симуляции получили кодификацию <strong class="text-white">NATO</strong>.
-            </p>
+    <!-- Экран 3: Маршруты (Детально для Техдира) -->
+    <section class="py-24 px-6 max-w-6xl mx-auto">
+        <div class="mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Форматы работы (Маршруты)</h2>
+            <p class="text-gray-500 text-lg">Разверните, чтобы изучить технические детали.</p>
+        </div>
+
+        <div class="space-y-4">
+            <!-- Аккордеон 1 -->
+            <details class="group bg-white border border-gray-200 p-6 shadow-sm">
+                <summary class="text-xl md:text-2xl font-bold flex justify-between items-center select-none">
+                    01. Product Partnership (Новый продукт)
+                    <svg class="accordion-icon w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="mt-8 pt-6 border-t border-gray-100 text-gray-700 space-y-6">
+                    <p class="font-medium text-black">Для основателей, инвесторов и владельцев бизнеса, запускающих новый самостоятельный цифровой продукт (идея, прототип или ранняя версия).</p>
+                    <p><strong>Что мы делаем:</strong> Мы оцениваем рыночную, продуктовую и коммерческую логику до перехода к разработке. Если логика держится — мы структурируем правильную первую версию, строим систему, поддерживаем запуск и можем участвовать более глубоко в рамках согласованной структуры партнерства.</p>
+                    <p><strong>Что меняется:</strong> Вы получаете готовое решение до того, как начнете сжигать бюджет на код, и одного ответственного оператора после запуска.</p>
+                </div>
+            </details>
+
+            <!-- Аккордеон 2 -->
+            <details class="group bg-white border border-gray-200 p-6 shadow-sm">
+                <summary class="text-xl md:text-2xl font-bold flex justify-between items-center select-none">
+                    02. Annual Product Operations (Внутренние системы)
+                    <svg class="accordion-icon w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="mt-8 pt-6 border-t border-gray-100 text-gray-700 space-y-6">
+                    <p class="font-medium text-black">Для существующих компаний, которым нужны связанные цифровые операции: автоматизация, AI, внутренние инструменты, интеграции.</p>
+                    <p><strong>Ваша ситуация:</strong> Заказы, запросы и отчёты живут в мессенджерах, почте, таблицах и ручных шагах. Бизнес держится на людях и таблицах.</p>
+                    <p><strong>Процесс работы (Roadmap):</strong> Мы начинаем с бизнес-процесса, определяем годовую дорожную карту продукта и автоматизации, а затем выполняем её месячными циклами.</p>
+                    <p><strong>Результат:</strong> Одна связанная система с конкретным владельцем вместо десятка разрозненных инструментов.</p>
+                </div>
+            </details>
+
+            <!-- Аккордеон 3 -->
+            <details class="group bg-white border border-gray-200 p-6 shadow-sm">
+                <summary class="text-xl md:text-2xl font-bold flex justify-between items-center select-none">
+                    03. Existing Product Review & Funding Support
+                    <svg class="accordion-icon w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </summary>
+                <div class="mt-8 pt-6 border-t border-gray-100 text-gray-700 space-y-6">
+                    <p><strong>Existing Product Review:</strong> Для работающего продукта, который остановился в росте, и владельца, готового к партнёру. Включает платный обзор продуктовой логики, позиционирования, UX, монетизации, технологий, аналитики и операций.</p>
+                    <p><strong>Funding & Grant Support:</strong> Подготовка продукта, проходящего грантовый или инвестиционный процесс. Мы формируем объем продукта, дорожную карту, логику бюджета и техническое обоснование (technical narrative).</p>
+                </div>
+            </details>
         </div>
     </section>
 
-    <!-- Экран 3: Executive Summary -->
-    <section class="py-20 px-6">
-        <div class="max-w-5xl mx-auto">
-            <h2 class="text-3xl font-bold mb-12 text-center">Logics7 за 1 минуту: почему собственники выбирают нас</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
-                    <div class="text-accent text-3xl font-bold mb-4">01</div>
-                    <h3 class="text-xl font-semibold mb-2">Не тратим деньги впустую</h3>
-                    <p class="text-gray-600">Сначала проверяем, держится ли коммерческая логика. Если идея не взлетит — мы скажем об этом до написания первой строчки кода.</p>
+    <!-- Экран 4: Жизненный цикл (Глубокая экспертиза) -->
+    <section class="py-24 bg-white px-6">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12">Один оператор на весь жизненный цикл</h2>
+            <div class="grid md:grid-cols-5 gap-6">
+                <!-- Шаг 1 -->
+                <div class="border-t-2 border-black pt-4">
+                    <div class="text-sm font-bold text-gray-400 mb-2">01</div>
+                    <h3 class="text-lg font-bold mb-2">Validate (Проверка)</h3>
+                    <p class="text-sm text-gray-600">Оценка рынка, пользователя и коммерческой логики до перехода к следующему этапу.</p>
                 </div>
-                <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
-                    <div class="text-accent text-3xl font-bold mb-4">02</div>
-                    <h3 class="text-xl font-semibold mb-2">Отвечаем за всё</h3>
-                    <p class="text-gray-600">Прототип могут собрать многие. Мы отвечаем за архитектуру, безопасность, работу с данными и ведение продукта после запуска.</p>
+                <!-- Шаг 2 -->
+                <div class="border-t-2 border-black pt-4">
+                    <div class="text-sm font-bold text-gray-400 mb-2">02</div>
+                    <h3 class="text-lg font-bold mb-2">Structure (Структура)</h3>
+                    <p class="text-sm text-gray-600">Превращение возможности в четкую продуктовую модель, распределение зон ответственности.</p>
                 </div>
-                <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
-                    <div class="text-accent text-3xl font-bold mb-4">03</div>
-                    <h3 class="text-xl font-semibold mb-2">Не работаем на потоке</h3>
-                    <p class="text-gray-600">Берем не более 5 продуктов в разработку одновременно. Полное погружение в каждый проект.</p>
+                <!-- Шаг 3 -->
+                <div class="border-t-2 border-black pt-4">
+                    <div class="text-sm font-bold text-gray-400 mb-2">03</div>
+                    <h3 class="text-lg font-bold mb-2">Build (Разработка)</h3>
+                    <p class="text-sm text-gray-600">Координация инженерии, дизайна, AI, автоматизации и контроля качества как единой системы.</p>
                 </div>
-                <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100">
-                    <div class="text-accent text-3xl font-bold mb-4">04</div>
-                    <h3 class="text-xl font-semibold mb-2">Работаем как партнеры</h3>
-                    <p class="text-gray-600">Внедряемся в ваш бизнес как собственный IT-отдел с конкретным ответственным лицом.</p>
+                <!-- Шаг 4 -->
+                <div class="border-t-2 border-black pt-4">
+                    <div class="text-sm font-bold text-gray-400 mb-2">04</div>
+                    <h3 class="text-lg font-bold mb-2">Launch (Запуск)</h3>
+                    <p class="text-sm text-gray-600">Переход от рабочего продукта к контролируемому релизу с настроенной аналитикой.</p>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Экран 4: Про вас (Аккордеоны) -->
-    <section class="py-20 bg-gray-100 px-6">
-        <div class="max-w-3xl mx-auto">
-            <h2 class="text-3xl font-bold mb-4 text-center">Что из этого — про вас?</h2>
-            <p class="text-gray-500 text-center mb-10">Нажмите на подходящий вариант, чтобы узнать детали</p>
-            
-            <div class="space-y-4">
-                <details class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden" open>
-                    <summary class="p-6 font-semibold text-lg flex justify-between items-center select-none hover:bg-gray-50">
-                        Ваш бизнес держится на людях и таблицах
-                        <span class="text-accent text-2xl accordion-icon">+</span>
-                    </summary>
-                    <div class="px-6 pb-6 text-gray-600 space-y-3">
-                        <p><strong class="text-gray-900">Ваша ситуация:</strong> Заказы, отчеты и коммуникация разбросаны по мессенджерам, почте и Excel. Вы теряете время и совершаете ручные ошибки.</p>
-                        <p><strong class="text-gray-900">Что мы делаем:</strong> Превращаем ваш хаос в единую связанную систему (автоматизация, внутренние инструменты).</p>
-                        <p><strong class="text-gray-900">Результат:</strong> Одна система с конкретным владельцем вместо 10 инструментов, которые не дружат друг с другом.</p>
-                    </div>
-                </details>
-
-                <details class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                    <summary class="p-6 font-semibold text-lg flex justify-between items-center select-none hover:bg-gray-50">
-                        У вас есть продукт, который нужно запустить
-                        <span class="text-accent text-2xl accordion-icon">+</span>
-                    </summary>
-                    <div class="px-6 pb-6 text-gray-600 space-y-3">
-                        <p><strong class="text-gray-900">Ваша ситуация:</strong> Есть идея, прототип или ранняя версия.</p>
-                        <p><strong class="text-gray-900">Что мы делаем:</strong> Структурируем логику, строим архитектуру, запускаем MVP и ведем его дальше.</p>
-                        <p><strong class="text-gray-900">Результат:</strong> Вы получаете рабочее решение и одного оператора, который отвечает за его развитие.</p>
-                    </div>
-                </details>
-
-                <details class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                    <summary class="p-6 font-semibold text-lg flex justify-between items-center select-none hover:bg-gray-50">
-                        Ваш работающий продукт остановился в росте
-                        <span class="text-accent text-2xl accordion-icon">+</span>
-                    </summary>
-                    <div class="px-6 pb-6 text-gray-600 space-y-3">
-                        <p><strong class="text-gray-900">Ваша ситуация:</strong> Система не справляется с нагрузками, пользователи уходят, а добавление новых функций ломает старые.</p>
-                        <p><strong class="text-gray-900">Что мы делаем:</strong> Проводим жесткий аудит, рефакторим архитектуру и переводим продукт на современные рельсы.</p>
-                        <p><strong class="text-gray-900">Результат:</strong> Масштабируемый продукт без «костылей» и прозрачный план его дальнейшего развития.</p>
-                    </div>
-                </details>
-            </div>
-        </div>
-    </section>
-
-    <!-- Экран 5: Процесс -->
-    <section class="py-20 px-6">
-        <div class="max-w-3xl mx-auto">
-            <h2 class="text-3xl font-bold mb-4 text-center">Как мы работаем</h2>
-            <p class="text-gray-500 text-center mb-10">Без сюрпризов и скрытых смет</p>
-            
-            <div class="space-y-4">
-                <details class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                    <summary class="p-6 font-semibold text-lg flex items-center select-none hover:bg-gray-50">
-                        <span class="text-accent mr-4 bg-blue-50 px-3 py-1 rounded">1</span>
-                        Вы пишете нам (Отвечаем за 1 день)
-                    </summary>
-                    <div class="px-6 pb-6 ml-14 text-gray-600">
-                        Расскажите, над чем работаете. Мы подберем формат ДО того, как начнем обсуждать бюджеты и объемы.
-                    </div>
-                </details>
-
-                <details class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                    <summary class="p-6 font-semibold text-lg flex items-center select-none hover:bg-gray-50">
-                        <span class="text-accent mr-4 bg-blue-50 px-3 py-1 rounded">2</span>
-                        Созвон на 30 минут (Мы не продаем)
-                    </summary>
-                    <div class="px-6 pb-6 ml-14 text-gray-600">
-                        <!-- ИСПРАВЛЕНА ОШИБКА "Полгода" -> "Полчаса" -->
-                        Полчаса мы просто задаем вопросы о вашей ситуации, чтобы понять, имеет ли смысл идти дальше.
-                    </div>
-                </details>
-
-                <details class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                    <summary class="p-6 font-semibold text-lg flex items-center select-none hover:bg-gray-50">
-                        <span class="text-accent mr-4 bg-blue-50 px-3 py-1 rounded">3</span>
-                        Решение ДО разработки
-                    </summary>
-                    <div class="px-6 pb-6 ml-14 text-gray-600">
-                        В течение 7 дней мы проводим оценку. Итог — одно из трех решений от нашего CEO: продолжить, переработать идею или отказать.
-                    </div>
-                </details>
-
-                <details class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                    <summary class="p-6 font-semibold text-lg flex items-center select-none hover:bg-gray-50">
-                        <span class="text-accent mr-4 bg-blue-50 px-3 py-1 rounded">4</span>
-                        Строим и ведем
-                    </summary>
-                    <div class="px-6 pb-6 ml-14 text-gray-600">
-                        Разработка начинается только после утверждения письменных условий. Запуск — это только начало. Дальше мы ведем продукт.
-                    </div>
-                </details>
-            </div>
-        </div>
-    </section>
-
-    <!-- Экран 6: Квалификация и CTA -->
-    <section id="contact" class="py-20 bg-primary text-white px-6">
-        <div class="max-w-4xl mx-auto">
-            <div class="bg-gray-800 rounded-2xl p-8 md:p-12 shadow-2xl border border-gray-700">
-                <div class="flex flex-col md:flex-row gap-12">
-                    
-                    <div class="flex-1">
-                        <h3 class="text-2xl font-bold mb-6 text-red-400">Нам точно НЕ по пути, если:</h3>
-                        <ul class="space-y-4 text-gray-300">
-                            <li class="flex items-start">
-                                <span class="mr-3 text-red-500">✕</span>
-                                Вам нужен прототип «на завтра», а дальше трава не расти.
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-red-500">✕</span>
-                                Вы хотите просто покупать дешевые «часы разработчиков».
-                            </li>
-                            <li class="flex items-start">
-                                <span class="mr-3 text-red-500">✕</span>
-                                Вам нужна слепая разработка по ТЗ, без погружения в бизнес-логику.
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="flex-1 flex flex-col justify-center">
-                        <h3 class="text-2xl font-bold mb-4">Готовы обсудить вашу задачу?</h3>
-                        <p class="text-gray-400 mb-8">Ответьте на 5 коротких вопросов, и мы скажем, какой маршрут подойдет именно вам. Это займет меньше минуты.</p>
-                        
-                        <button class="bg-accent hover:bg-blue-600 text-white font-bold py-4 px-8 rounded-lg w-full mb-4 transition text-center shadow-lg shadow-blue-500/30">
-                            Пройти квалификацию
-                        </button>
-                        <p class="text-center text-sm text-gray-500">
-                            Или напишите напрямую: <a href="mailto:hello@logics7.com" class="text-gray-300 hover:text-white underline decoration-gray-600">hello@logics7.com</a>
-                        </p>
-                    </div>
-
+                <!-- Шаг 5 -->
+                <div class="border-t-2 border-black pt-4">
+                    <div class="text-sm font-bold text-gray-400 mb-2">05</div>
+                    <h3 class="text-lg font-bold mb-2">Operate (Ведение)</h3>
+                    <p class="text-sm text-gray-600">Улучшение продукта через непрерывное выполнение и сбор операционной обратной связи.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Подвал -->
-    <footer class="bg-gray-900 py-8 text-center text-gray-500 text-sm border-t border-gray-800">
-        <p>&copy; 2026 Logics7. Все права защищены.</p>
+    <!-- Экран 5: Почему не просто AI/Кодеры (Сравнительная таблица) -->
+    <section class="py-24 px-6 max-w-6xl mx-auto">
+        <details class="group bg-gray-100 p-8">
+            <summary class="text-2xl font-bold flex justify-between items-center select-none">
+                Сравнение: AI-конструкторы vs Logics7
+                <svg class="accordion-icon w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </summary>
+            <div class="mt-8 overflow-x-auto">
+                <p class="mb-6 text-gray-700 max-w-3xl">AI-платформы и кодовые агенты могут собрать приложение за несколько часов. Инструмент даёт вам прототип. Но никто внутри него не отвечает за бизнес-логику, безопасность и то, что будет после запуска. Это работа продуктового оператора.</p>
+                <table class="w-full text-left border-collapse min-w-[800px]">
+                    <thead>
+                        <tr class="border-b border-gray-300">
+                            <th class="py-4 pr-4 font-bold">Вариант</th>
+                            <th class="py-4 px-4 font-bold text-sm text-gray-500">Проверка</th>
+                            <th class="py-4 px-4 font-bold text-sm text-gray-500">Структура</th>
+                            <th class="py-4 px-4 font-bold text-sm text-gray-500">Разработка</th>
+                            <th class="py-4 px-4 font-bold text-sm text-gray-500">Запуск</th>
+                            <th class="py-4 pl-4 font-bold text-sm text-gray-500">Ведение</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm">
+                        <tr class="border-b border-gray-200">
+                            <td class="py-4 pr-4 font-medium">AI-конструкторы (прототип)</td>
+                            <td class="py-4 px-4 text-gray-400">Не входит</td>
+                            <td class="py-4 px-4 text-gray-400">Не входит</td>
+                            <td class="py-4 px-4">Частично</td>
+                            <td class="py-4 px-4">По запросу</td>
+                            <td class="py-4 pl-4 text-gray-400">Не входит</td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="py-4 pr-4 font-bold">Logics7 (Продуктовый оператор)</td>
+                            <td class="py-4 px-4 font-medium">Включено</td>
+                            <td class="py-4 px-4 font-medium">Включено</td>
+                            <td class="py-4 px-4 font-medium">Включено</td>
+                            <td class="py-4 px-4 font-medium">Включено</td>
+                            <td class="py-4 pl-4 font-medium">Включено</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </details>
+    </section>
+
+    <!-- Экран 6: Контакты и Процесс -->
+    <section id="contact" class="py-24 bg-brand-black text-white px-6">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16">
+            <div>
+                <h2 class="text-3xl font-bold mb-8">Начать разговор. <br> Без слепой разработки.</h2>
+                <div class="space-y-6 text-gray-400 text-sm">
+                    <p><strong class="text-white block text-base mb-1">01. Напишите нам</strong> Мы отвечаем в течение 1 рабочего дня и говорим, какой формат подходит, ДО того, как кто-то заговорит об объемах.</p>
+                    <p><strong class="text-white block text-base mb-1">02. 30-минутный разговор</strong> Мы расспрашиваем о вашей ситуации. Мы не продаем. "Если это не будет работать, я лучше скажу об этом на первом звонке, чем возьмусь это строить".</p>
+                    <p><strong class="text-white block text-base mb-1">03. Решение до разработки</strong> Оценка до 7 рабочих дней заканчивается решением: Продолжить, Переработать или Отказать.</p>
+                </div>
+            </div>
+            <div class="bg-brand-gray p-8 border border-gray-800">
+                <h3 class="text-xl font-bold mb-6">Над чем вы работаете?</h3>
+                <form class="space-y-4">
+                    <label class="flex items-start space-x-3 cursor-pointer">
+                        <input type="checkbox" class="mt-1 bg-black border-gray-600 rounded">
+                        <span class="text-sm text-gray-300">Новый самостоятельный цифровой продукт (идея, прототип)</span>
+                    </label>
+                    <label class="flex items-start space-x-3 cursor-pointer">
+                        <input type="checkbox" class="mt-1 bg-black border-gray-600 rounded">
+                        <span class="text-sm text-gray-300">Связанные цифровые операции: автоматизация, внутренние инструменты</span>
+                    </label>
+                    <label class="flex items-start space-x-3 cursor-pointer">
+                        <input type="checkbox" class="mt-1 bg-black border-gray-600 rounded">
+                        <span class="text-sm text-gray-300">Работающий продукт, который остановился в росте</span>
+                    </label>
+                    <button type="button" class="mt-6 w-full bg-white text-black font-bold py-3 hover:bg-gray-200 transition">
+                        Связаться
+                    </button>
+                </form>
+                <p class="mt-6 text-sm text-gray-500 text-center">
+                    Или напишите напрямую: <a href="mailto:hello@logics7.com" class="text-white underline">hello@logics7.com</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер с юр. данными -->
+    <footer class="bg-black py-12 text-gray-500 text-xs px-6 border-t border-gray-900">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+                <p>LOGICS7 LTD. Компания № 14260707. Зарегистрирована в Англии и Уэльсе.</p>
+                <p>Юридический адрес: Fourth Floor, 4–8 Ludgate Circus, London, EC4M 7LF, United Kingdom.</p>
+            </div>
+            <div>
+                <p>&copy; 2026 Logics7. Все права защищены.</p>
+            </div>
+        </div>
     </footer>
 
 </body>
