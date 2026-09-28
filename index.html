@@ -1,257 +1,649 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logics7 | Продуктовый оператор</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'] },
-                    colors: { 
-                        brand: { black: '#0a0a0a', white: '#ffffff', gray: '#1a1a1a', light: '#f5f5f5' }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        /* Премиальная анимация аккордеонов */
-        details > summary { list-style: none; cursor: pointer; }
-        details > summary::-webkit-details-marker { display: none; }
-        details[open] summary ~ * { animation: slideDown 0.4s ease-in-out; }
-        @keyframes slideDown {
-            0% { opacity: 0; transform: translateY(-10px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-        .accordion-icon { transition: transform 0.3s ease; }
-        details[open] > summary > .accordion-icon { transform: rotate(180deg); }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Logics7 — продуктовый оператор. Мы берём на себя вашу IT-разработку</title>
+<meta name="description" content="Logics7 — продуктовый оператор. Проверяем, строим и ведём цифровые продукты и бизнес-системы. Никакой разработки без продуктовой логики.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff; --surface:#F7F7F6; --surface-2:#F1F1EF; --inverse:#0A0A0A;
+  --text:#0A0A0A; --muted:#5A5A57; --subtle:#8A8A86;
+  --border:#E3E3E0; --border-strong:#C9C9C5;
+  --accent:#FF8A23; --accent-text:#C25E05; --accent-subtle:#FFF4EA;
+  --sans:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --display:clamp(38px,6vw,76px); --h1:clamp(30px,4vw,50px); --h2:clamp(24px,2.6vw,32px);
+  --body-lg:clamp(17px,1.3vw,20px);
+  --w:1200px; --pad:clamp(20px,4vw,48px);
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0F0F0E; --surface:#161615; --surface-2:#1B1B1A; --inverse:#000;
+  --text:#F2F2EF; --muted:#A8A8A3; --subtle:#7A7A76; --border:#2A2A28; --border-strong:#3A3A37;
+  --accent-text:#FF9A42; --accent-subtle:#2A1C10;
+}}
+:root[data-theme="dark"]{
+  --bg:#0F0F0E; --surface:#161615; --surface-2:#1B1B1A; --inverse:#000;
+  --text:#F2F2EF; --muted:#A8A8A3; --subtle:#7A7A76; --border:#2A2A28; --border-strong:#3A3A37;
+  --accent-text:#FF9A42; --accent-subtle:#2A1C10;
+}
+html{scroll-padding-top:calc(88px + env(safe-area-inset-top,0px));scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+img,svg{max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.container{max-width:var(--w);margin:0 auto;padding:0 var(--pad)}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--subtle)}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-text);margin:0 0 16px}
+h1,h2,h3{margin:0;font-weight:300;letter-spacing:-.02em}
+h1{font-size:var(--display);line-height:1.02}
+h2{font-size:var(--h1);line-height:1.08;letter-spacing:-.01em}
+h3{font-size:var(--h2);line-height:1.15;font-weight:500;letter-spacing:-.01em}
+p{margin:0}
+.muted{color:var(--muted)}
+.lead{font-size:var(--body-lg);line-height:1.5}
+section{padding:64px 0;border-top:1px solid var(--border)}
+@media(min-width:768px){section{padding:96px 0}}
+.surface{background:var(--surface)}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:12px 22px;border-radius:6px;font-weight:500;font-size:15px;border:1px solid var(--text);transition:background .15s,color .15s,border-color .15s}
+.btn-primary{background:var(--text);color:var(--bg)}
+.btn-primary:hover{background:var(--accent);border-color:var(--accent);color:#0A0A0A}
+.btn-secondary{background:transparent;color:var(--text);border-color:var(--border-strong)}
+.btn-secondary:hover{border-color:var(--text)}
+.link{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-weight:500;transition:color .15s}
+.link:hover{color:var(--accent-text)}
+.dot{display:inline-block;width:6px;height:6px;background:var(--accent);margin-right:12px;vertical-align:middle}
+
+/* header */
+header{position:fixed;inset:0 0 auto 0;z-index:50;background:var(--bg);border-bottom:1px solid var(--border);padding-top:env(safe-area-inset-top,0px)}
+.nav{height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo{font-weight:500;font-size:22px;letter-spacing:-.02em;display:flex;align-items:center;gap:2px}
+.logo b{color:var(--accent);font-weight:500}
+.nav ul{display:none;list-style:none;margin:0;padding:0;gap:24px}
+.nav ul a{font-size:14px;color:var(--muted)} .nav ul a:hover{color:var(--text)}
+@media(min-width:960px){.nav ul{display:flex}}
+.nav .btn{min-height:40px;padding:8px 16px;font-size:13px}
+
+/* hero */
+.hero{padding-top:calc(72px + 56px);border-top:0}
+@media(min-width:768px){.hero{padding-top:calc(72px + 88px)}}
+.hero-grid{display:grid;gap:40px;align-items:center}
+@media(min-width:1024px){.hero-grid{grid-template-columns:7fr 5fr;gap:64px}}
+.hero h1 span{color:var(--accent-text)}
+.hero .lead{margin-top:28px;max-width:34em;color:var(--muted)}
+.hero .rule{margin-top:14px;font-weight:500}
+.hero .cta{margin-top:32px;display:flex;flex-wrap:wrap;gap:12px}
+.hero .facts{margin:40px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:8px 24px}
+.stack{width:100%;max-width:420px;margin:0 auto;display:block}
+@media(min-width:1024px){.stack{max-width:none}}
+
+/* grids */
+.grid{display:grid;gap:1px;background:var(--border);border:1px solid var(--border)}
+.grid>*{background:var(--bg)}
+.grid-2{grid-template-columns:1fr} .grid-4{grid-template-columns:1fr 1fr}
+@media(min-width:768px){.grid-2{grid-template-columns:1fr 1fr}}
+@media(min-width:1024px){.grid-4{grid-template-columns:repeat(4,1fr)}}
+.cell{padding:28px}
+@media(min-width:768px){.cell{padding:36px}}
+
+/* accordion */
+.acc{border-top:1px solid var(--border)}
+.acc-item{border-bottom:1px solid var(--border)}
+.acc-btn{width:100%;display:grid;grid-template-columns:32px 1fr 24px;gap:12px;align-items:center;text-align:left;padding:20px 8px;margin:0 -8px;width:calc(100% + 16px);transition:background .15s}
+@media(min-width:768px){.acc-btn{grid-template-columns:44px 1fr 32px;gap:16px;padding:24px 8px}}
+.acc-btn:hover{background:var(--surface)}
+.acc-btn .n{font-family:var(--mono);font-size:12px;color:var(--subtle)}
+.acc-btn .t{font-size:17px;font-weight:500}
+@media(min-width:768px){.acc-btn .t{font-size:19px}}
+.acc-btn .sub{display:block;margin-top:4px;font-size:14px;font-weight:400;color:var(--muted)}
+.acc-btn svg{width:14px;height:14px;stroke:currentColor;stroke-width:1.5;fill:none;stroke-linecap:square;transition:transform .2s cubic-bezier(.16,1,.3,1);justify-self:end;color:var(--subtle)}
+.acc-btn[aria-expanded="true"] svg{transform:rotate(45deg)}
+.acc-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s cubic-bezier(.16,1,.3,1)}
+.acc-panel[data-open]{grid-template-rows:1fr}
+.acc-panel>div{overflow:hidden}
+.acc-body{padding:0 8px 24px 44px;color:var(--muted);font-size:15px;line-height:1.6}
+@media(min-width:768px){.acc-body{padding:0 40px 28px 60px;font-size:16px}}
+.acc-body dl{margin:0;display:grid;gap:14px}
+.acc-body dl div{display:grid;gap:4px}
+@media(min-width:640px){.acc-body dl div{grid-template-columns:130px 1fr;gap:20px}}
+.acc-body dt{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--subtle);padding-top:3px}
+.acc-body dd{margin:0}
+.acc-body dd.strong{color:var(--text);font-weight:500}
+.acc-body .link{margin-top:16px}
+.acc-body ul{margin:10px 0 0;padding-left:18px}
+.acc-body li+li{margin-top:6px}
+@media(prefers-reduced-motion:reduce){.acc-panel,.acc-btn svg,.btn,.link{transition:none}}
+
+/* trust */
+.trust-grid{display:grid;gap:24px}
+@media(min-width:1024px){.trust-grid{grid-template-columns:5fr 7fr;gap:64px;align-items:start}}
+.logos{margin:40px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.logos li{flex:1 1 150px;height:76px;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:500;font-size:17px;letter-spacing:-.005em;opacity:.7;transition:opacity .15s;border-right:1px solid var(--border)}
+.logos li:last-child{border-right:0}
+.logos li:hover{opacity:1;color:var(--accent-text)}
+
+/* summary */
+.sum .cell h3{font-size:20px;margin-top:14px}
+.sum .cell p{margin-top:10px;color:var(--muted);font-size:15px}
+.sum .more{margin-top:18px;font-size:14px;color:var(--accent-text);display:inline-flex;align-items:center;gap:6px;min-height:32px}
+.sum .more svg{width:12px;height:12px;stroke:currentColor;stroke-width:1.5;fill:none;transition:transform .2s}
+.sum .more[aria-expanded="true"] svg{transform:rotate(45deg)}
+.sum .cell .acc-panel .acc-body{padding:12px 0 0;font-size:14px}
+
+/* process */
+.steps{display:grid;gap:40px;position:relative;margin-top:48px}
+@media(min-width:1024px){.steps{grid-template-columns:repeat(4,1fr);gap:32px}}
+.step{position:relative;padding-left:44px}
+@media(min-width:1024px){.step{padding-left:0}}
+.step .num{position:absolute;left:0;top:0;width:27px;height:27px;border-radius:50%;border:1px solid var(--border-strong);background:var(--bg);display:inline-flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:12px}
+@media(min-width:1024px){.step .num{position:static;margin-bottom:22px}}
+.step h3{font-size:18px}
+.step .brief{margin-top:10px;font-size:15px;color:var(--muted)}
+.step .expand{margin-top:12px;font-size:14px;color:var(--accent-text);display:inline-flex;gap:6px;align-items:center;min-height:32px}
+.step .expand svg{width:12px;height:12px;stroke:currentColor;stroke-width:1.5;fill:none;transition:transform .2s}
+.step .expand[aria-expanded="true"] svg{transform:rotate(45deg)}
+.step .acc-body{padding:10px 0 0;font-size:14px}
+.verdict{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;list-style:none;padding:0}
+.verdict li{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;padding:6px 10px;border:1px solid var(--border-strong);display:flex;align-items:center;gap:8px}
+.verdict i{width:8px;height:8px;display:inline-block}
+.verdict .ok i{background:var(--accent)} .verdict .re i{border:1px solid var(--accent)} .verdict .no i{background:var(--border-strong)}
+.chain{margin-top:48px;padding-top:24px;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:center}
+.chain p{font-family:var(--mono);font-size:13px;color:var(--muted)}
+
+/* inverse band */
+.inverse{background:var(--inverse);color:#fff;border-top:0}
+.inverse .two{display:grid;gap:48px;margin-top:48px}
+@media(min-width:1024px){.inverse .two{grid-template-columns:1fr 1fr;gap:64px}}
+.inverse h3{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:400;color:var(--accent)}
+.inverse h3.no{color:rgba(255,255,255,.6)}
+.inverse ul{list-style:none;margin:20px 0 0;padding:0}
+.inverse li{display:flex;gap:16px;align-items:baseline;padding:16px 0;border-top:1px solid rgba(255,255,255,.15);font-size:17px}
+.inverse li i{font-style:normal;font-family:var(--mono);font-size:12px;color:var(--accent);flex-shrink:0}
+.inverse .no+ul li{color:rgba(255,255,255,.8)} .inverse .no+ul li i{color:rgba(255,255,255,.5)}
+
+/* filter + cta */
+.split{display:grid;gap:32px}
+@media(min-width:1024px){.split{grid-template-columns:5fr 6fr;gap:96px;align-items:start}}
+.list{list-style:none;margin:0;padding:0;border-top:1px solid var(--border)}
+.list li{display:flex;gap:16px;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--border);font-size:17px}
+.list li .n{font-family:var(--mono);font-size:13px;color:var(--subtle);flex-shrink:0}
+.cta-box{margin-top:64px;border:1px solid var(--border);background:var(--bg);padding:32px}
+@media(min-width:768px){.cta-box{padding:48px}}
+.cta-box .row{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.cta-box .alt{margin-top:24px;font-size:14px;color:var(--subtle)}
+.cta-box .alt a{color:var(--text)} .cta-box .alt a:hover{color:var(--accent-text)}
+
+/* quiz */
+.quiz{margin-top:32px;display:none}
+.quiz[data-open]{display:block}
+.quiz .q{font-size:22px;font-weight:300;margin-top:12px}
+.quiz ul{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:1px;background:var(--border);border:1px solid var(--border)}
+.quiz li button{width:100%;text-align:left;background:var(--bg);padding:18px 22px;display:flex;gap:14px;align-items:baseline;transition:background .15s}
+.quiz li button:hover,.quiz li button[aria-pressed="true"]{background:var(--surface)}
+.quiz li button span.box{font-family:var(--mono);font-size:13px;color:var(--subtle)}
+.quiz li button[aria-pressed="true"] span.box{color:var(--accent-text)}
+.quiz .foot{margin-top:20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.quiz .result{margin-top:24px;padding:24px;border-left:2px solid var(--accent);background:var(--accent-subtle)}
+.quiz .result h4{margin:0 0 8px;font-size:20px;font-weight:500}
+
+/* footer */
+footer{background:var(--surface-2);border-top:1px solid var(--border);padding:56px 0;font-size:14px;color:var(--muted)}
+footer .cols{display:grid;gap:32px}
+@media(min-width:768px){footer .cols{grid-template-columns:2fr 1fr 1fr}}
+footer ul{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px}
+footer a:hover{color:var(--accent-text)}
+footer .legal{margin-top:40px;padding-top:24px;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
 </head>
-<body class="font-sans bg-brand-light text-brand-black antialiased selection:bg-brand-black selection:text-white">
+<body>
 
-    <!-- Навигация -->
-    <nav class="fixed w-full bg-brand-light/90 backdrop-blur-md z-50 border-b border-gray-200">
-        <div class="max-w-6xl mx-auto px-6 py-5 flex justify-between items-center">
-            <div class="text-2xl font-bold tracking-tight">Logics7</div>
-            <a href="#contact" class="text-sm font-medium border-b border-brand-black pb-1 hover:text-gray-600 hover:border-gray-600 transition">Написать нам</a>
+<header>
+  <div class="container nav">
+    <a href="#top" class="logo" aria-label="Logics7">Logics<b>7</b></a>
+    <ul>
+      <li><a href="#about-you">Про вас</a></li>
+      <li><a href="#process">Как мы работаем</a></li>
+      <li><a href="#trust">Доверие</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#fit">Кому не подходим</a></li>
+    </ul>
+    <a href="#cta" class="btn btn-primary">Начать разговор</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- 1. Первый экран -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <h1>Мы берём на себя вашу IT-разработку. <span>От идеи до стабильной работы в продакшене.</span></h1>
+      <p class="lead">Logics7 — ваш продуктовый оператор. Мы проверяем, строим и ведём цифровые продукты и бизнес-системы.</p>
+      <p class="rule">Никакой разработки без продуктовой и коммерческой логики.</p>
+      <div class="cta">
+        <a href="#cta" class="btn btn-primary">Начать разговор <span aria-hidden="true">→</span></a>
+        <a href="https://logics7.com/ru/present" class="btn btn-secondary">Смотреть питч-дек (6 слайдов)</a>
+      </div>
+      <ul class="facts mono">
+        <li><span class="dot"></span>Продукт и инженерия с 2012 года</li>
+        <li><span class="dot"></span>LOGICS7 LTD · Лондон, Великобритания</li>
+        <li><span class="dot"></span>Строим и ведём собственные продукты</li>
+      </ul>
+    </div>
+    <svg class="stack" viewBox="0 0 800 720" role="img" aria-label="Пять этапов жизни продукта как стопка плоскостей; подсвечен этап «Ведём»">
+      <defs><linearGradient id="lit" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF8A23" stop-opacity=".26"/><stop offset="1" stop-color="#FF8A23" stop-opacity=".08"/></linearGradient></defs>
+      <line x1="400" y1="27" x2="400" y2="563" stroke="#A44E06" stroke-width="1.5" stroke-dasharray="10 8"/>
+      <g fill="var(--bg)" stroke="var(--border-strong)">
+        <path d="M400 27 680 131 400 235 120 131Z"/><path d="M400 135 680 239 400 343 120 239Z"/>
+        <path d="M400 243 680 347 400 451 120 347Z"/><path d="M400 351 680 455 400 559 120 455Z"/>
+      </g>
+      <path d="M400 459 680 563 400 667 120 563Z" fill="url(#lit)" stroke="#FF8A23" stroke-width="1.8"/>
+      <path d="M120 563 400 667 680 563 680 579 400 683 120 579Z" fill="#FF8A23" fill-opacity=".12" stroke="#FF8A23" stroke-opacity=".45"/>
+      <g font-family="JetBrains Mono, monospace" font-size="18" fill="var(--subtle)">
+        <text x="700" y="136">01 Проверяем</text><text x="700" y="244">02 Структурируем</text>
+        <text x="700" y="352">03 Строим</text><text x="700" y="460">04 Запускаем</text>
+        <text x="700" y="568" fill="#C25E05">05 Ведём</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- 2. Блок доверия -->
+<section id="trust" class="surface">
+  <div class="container">
+    <div class="trust-grid">
+      <h2>Нам доверяют там, где ошибки стоят дорого.</h2>
+      <div>
+        <p class="lead muted">Наши системы работают в FinTech, LegalTech и иммиграционных сервисах, а профессиональная платформа военной симуляции получила кодификацию NATO в 2024 году.</p>
+        <div class="acc" style="margin-top:24px">
+          <div class="acc-item">
+            <button class="acc-btn" aria-expanded="false" aria-controls="p-trust"><span class="n">+</span><span class="t">Что именно стоит за этими словами</span><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12"/></svg></button>
+            <div id="p-trust" class="acc-panel" role="region"><div><div class="acc-body">
+              <ul>
+                <li><b>Иммиграционные сервисы</b> — платформы, работающие с адвокатской конторой, регулируемой SRA (Великобритания).</li>
+                <li><b>Legal-tech</b> — рабочие процессы для юридического сектора, где ошибка в данных стоит лицензии.</li>
+                <li><b>FinTech</b> — автоматизация кредитования (NeoFin), где система принимает платежи и управляет данными клиентов.</li>
+                <li><b>Военная симуляция</b> — PSS by Logics7, профессиональная платформа, получившая кодификацию NATO в 2024 году.</li>
+                <li><b>Собственные продукты</b> — Vendo AI, автономный AI-продукт для продаж: шесть каналов, встречи через Google Meet и Zoom, 145+ языков. Работает в боевом режиме.</li>
+              </ul>
+              <p style="margin-top:14px">В этих отраслях прототипа недостаточно — продукт это архитектура, безопасность, работа с данными и ответственность.</p>
+            </div></div></div>
+          </div>
         </div>
-    </nav>
+      </div>
+    </div>
+    <ul class="logos" aria-label="Продукты и кейсы">
+      <li>Vendo AI</li><li>NeoFin</li><li>Dovira</li><li>Smart Freight</li><li>L7 Simulators</li><li>Hillsong Church</li><li>Emigral</li>
+    </ul>
+  </div>
+</section>
 
-    <!-- Экран 1: Hero (Для CEO) -->
-    <section class="pt-40 pb-20 px-6 max-w-6xl mx-auto">
-        <h1 class="text-5xl md:text-7xl font-bold leading-tight mb-8 tracking-tight">
-            Цифровые продукты и бизнес-системы, <br class="hidden md:block">
-            <span class="text-gray-500">созданные для работы после запуска.</span>
-        </h1>
-        <p class="text-xl md:text-2xl font-medium max-w-3xl mb-12">
-            Logics7 — продуктовый оператор. Мы проверяем, структурируем, строим, запускаем и ведём. Никакой разработки без продуктовой логики.
-        </p>
-        <div class="flex flex-col sm:flex-row gap-6">
-            <a href="#contact" class="bg-brand-black text-white px-8 py-4 text-center font-medium hover:bg-gray-800 transition">
-                Начать разговор →
-            </a>
+<!-- 3. Executive Summary -->
+<section class="sum">
+  <div class="container">
+    <p class="eyebrow">Logics7 за 1 минуту</p>
+    <h2>Почему собственники выбирают нас.</h2>
+    <div class="grid grid-4" style="margin-top:48px">
+      <div class="cell">
+        <span class="mono">01</span>
+        <h3>Не тратим ваши деньги впустую</h3>
+        <p>Сначала проверяем, держится ли коммерческая логика. Если идея не взлетит — скажем об этом до первой строчки кода.</p>
+        <button class="more" aria-expanded="false" aria-controls="s1">Как это устроено <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12"/></svg></button>
+        <div id="s1" class="acc-panel"><div><div class="acc-body">Внутренняя оценка (Internal Validation Assessment) занимает до 7 рабочих дней и заканчивается устным решением с обоснованием: продолжить, переработать или отказать. Отвечаем за то, что логика держится; за ваш рыночный результат — нет: продажи и рост зависят от рынка и ваших решений.</div></div></div>
+      </div>
+      <div class="cell">
+        <span class="mono">02</span>
+        <h3>Отвечаем за всё</h3>
+        <p>Прототип соберут многие. Мы отвечаем за архитектуру, безопасность, работу с данными и ведение продукта после запуска.</p>
+        <button class="more" aria-expanded="false" aria-controls="s2">Почему это важно <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12"/></svg></button>
+        <div id="s2" class="acc-panel"><div><div class="acc-body">AI-платформы и кодовые агенты соберут приложение за пару часов — мы сами используем тот же стек, в том числе внутри Vendo AI. Но почти половина сгенерированного AI кода не проходит базовые тесты безопасности (Veracode, 2026). То, что даёт инструмент — прототип. Кто отвечает за бизнес-логику и то, что случится после запуска, — работа продуктового оператора.</div></div></div>
+      </div>
+      <div class="cell">
+        <span class="mono">03</span>
+        <h3>Не работаем на потоке</h3>
+        <p>Берём не более 5 продуктов в разработку одновременно.</p>
+        <button class="more" aria-expanded="false" aria-controls="s3">Цифры мощности <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12"/></svg></button>
+        <div id="s3" class="acc-panel"><div><div class="acc-body">10 новых продуктовых партнёрств в год · 14 годовых программ одновременно, у каждой — именной владелец · 6 грантовых заявок в год · 1 ответственный оператор на продукт. Инженерная мощность масштабируется через команды Logics7; решение CEO перед любой разработкой — нет. Это и есть реальный лимит.</div></div></div>
+      </div>
+      <div class="cell">
+        <span class="mono">04</span>
+        <h3>Работаем как партнёры</h3>
+        <p>Встраиваемся в ваш бизнес как собственный IT-отдел с конкретным ответственным лицом.</p>
+        <button class="more" aria-expanded="false" aria-controls="s4">Кто отвечает <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12"/></svg></button>
+        <div id="s4" class="acc-panel"><div><div class="acc-body">Марк Прайс, CEO — держит Leadership Gate: финальное решение продолжить / переработать / отказать. Дмитрий Супонев, основатель — 13 лет продуктовой и инженерной реализации, ведёт технологическую архитектуру, сооснователь Vendo AI. Каждое решение принимает конкретный человек и всегда его обосновывает.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Про вас -->
+<section id="about-you" class="surface">
+  <div class="container">
+    <h2>Что из этого — про вас?</h2>
+    <p class="muted" style="margin-top:12px">Откройте подходящий вариант, чтобы увидеть детали.</p>
+    <div class="acc" style="margin-top:40px">
+
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false" aria-controls="a1"><span class="n">01</span><span class="t">Ваш бизнес держится на людях и таблицах<span class="sub">Annual Product Operations</span></span><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12"/></svg></button>
+        <div id="a1" class="acc-panel" role="region"><div><div class="acc-body">
+          <dl>
+            <div><dt>Ваша ситуация</dt><dd>Заказы, отчёты и коммуникация разбросаны по мессенджерам, почте и Excel. Вы теряете время и совершаете ручные ошибки.</dd></div>
+            <div><dt>Что мы делаем</dt><dd>Превращаем хаос в единую связанную систему: автоматизация, внутренние инструменты, интеграции. Месяц за месяцем, по годовой дорожной карте.</dd></div>
+            <div><dt>Результат</dt><dd class="strong">Одна система с конкретным владельцем вместо 10 инструментов, которые не дружат друг с другом.</dd></div>
+          </dl>
+          <a class="link" href="https://logics7.com/ru/annual-product-operations">Подробнее о годовой программе <span aria-hidden="true">→</span></a>
+        </div></div></div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false" aria-controls="a2"><span class="n">02</span><span class="t">У вас есть продукт, который нужно запустить<span class="sub">Product Partnership</span></span><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12"/></svg></button>
+        <div id="a2" class="acc-panel" role="region"><div><div class="acc-body">
+          <dl>
+            <div><dt>Ваша ситуация</dt><dd>Есть идея, прототип или ранняя версия самостоятельного продукта.</dd></div>
+            <div><dt>Что мы делаем</dt><dd>Сначала проверяем, держится ли рынок, продукт и бизнес-логика. Если да — структурируем логику, строим архитектуру, запускаем MVP и ведём его дальше.</dd></div>
+            <div><dt>Результат</dt><dd class="strong">Решение до того, как вы потратите деньги на разработку, — а потом один оператор, который отвечает за развитие.</dd></div>
+          </dl>
+          <a class="link" href="https://logics7.com/ru/product-partnership">Подробнее о партнёрстве <span aria-hidden="true">→</span></a>
+        </div></div></div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false" aria-controls="a3"><span class="n">03</span><span class="t">Ваш работающий продукт остановился в росте<span class="sub">Existing Product Review</span></span><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12"/></svg></button>
+        <div id="a3" class="acc-panel" role="region"><div><div class="acc-body">
+          <dl>
+            <div><dt>Ваша ситуация</dt><dd>Живой продукт с реальными пользователями, который стагнирует, и владелец, открытый партнёру, который инвестирует в продукт.</dd></div>
+            <div><dt>Что мы делаем</dt><dd>Оцениваем код, бизнес-логику и рынок той же проверкой, что и новое партнёрство: письменно согласованный доступ к коду и данным → ревью → решение на Leadership Gate с обоснованием.</dd></div>
+            <div><dt>Результат</dt><dd class="strong">Честный вердикт по продукту и, если «да», переговоры о партнёрстве и доле — только письменно.</dd></div>
+          </dl>
+          <a class="link" href="https://logics7.com/ru/existing-product-review">Подробнее об аудите <span aria-hidden="true">→</span></a>
+        </div></div></div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false" aria-controls="a4"><span class="n">04</span><span class="t">Вам нужен грант или финансирование под цифровой продукт<span class="sub">Funding &amp; Grant Support</span></span><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12"/></svg></button>
+        <div id="a4" class="acc-panel" role="region"><div><div class="acc-body">
+          <dl>
+            <div><dt>Ваша ситуация</dt><dd>Продукт проходит грантовый отбор или процесс финансирования, а заявка требует связной продуктовой логики.</dd></div>
+            <div><dt>Что мы делаем</dt><dd>Переводим продуктовую логику в связный объём работ, дорожную карту, обоснование бюджета и вехи. Проверка готовности → Prepared Offer Meeting.</dd></div>
+            <div><dt>Результат</dt><dd class="strong">Заявка, которую можно защищать. Одобрение гранта не гарантируем — решает грантодатель.</dd></div>
+          </dl>
+          <a class="link" href="https://logics7.com/ru/funding-and-grant-support">Подробнее о поддержке <span aria-hidden="true">→</span></a>
+        </div></div></div>
+      </div>
+
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false" aria-controls="a5"><span class="n">05</span><span class="t">Вы хотите познакомить нас с компанией или основателем<span class="sub">Referral Program</span></span><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12"/></svg></button>
+        <div id="a5" class="acc-panel" role="region"><div><div class="acc-body">
+          <dl>
+            <div><dt>Ваша ситуация</dt><dd>Вы знаете компанию, основателя или лицо, принимающее решения, которому нужен Logics7.</dd></div>
+            <div><dt>Что мы делаем</dt><dd>Квалифицированные профессиональные рекомендации — не партнёрская программа. Подтверждаем компанию, ЛПР и запрос → письменные условия там, где уместно → само знакомство.</dd></div>
+            <div><dt>Результат</dt><dd class="strong">Прозрачные условия и вознаграждение, зафиксированные до первого разговора.</dd></div>
+          </dl>
+          <a class="link" href="https://logics7.com/ru/referral-program">Условия программы <span aria-hidden="true">→</span></a>
+        </div></div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 5. Процесс -->
+<section id="process">
+  <div class="container">
+    <p class="eyebrow">Как мы работаем</p>
+    <h2 style="max-width:22ch">Без сюрпризов и скрытых смет.</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="num">01</span>
+        <h3>Вы пишете нам</h3>
+        <p class="brief">Отвечаем за один рабочий день.</p>
+        <button class="expand" aria-expanded="false" aria-controls="st1">Подробнее <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12"/></svg></button>
+        <div id="st1" class="acc-panel"><div><div class="acc-body">Расскажите, над чем работаете. Мы подберём формат работы до того, как кто-либо начнёт обсуждать бюджеты и объёмы. Три вопроса, которые мы зададим первыми: какая идея, какую проблему решает, кто за это будет платить.</div></div></div>
+      </div>
+      <div class="step">
+        <span class="num">02</span>
+        <h3>Созвон на 30 минут</h3>
+        <p class="brief">Мы не продаём.</p>
+        <button class="expand" aria-expanded="false" aria-controls="st2">Подробнее <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12"/></svg></button>
+        <div id="st2" class="acc-panel"><div><div class="acc-body">Полчаса мы просто задаём вопросы о вашей ситуации, чтобы понять, имеет ли смысл идти дальше. Никакой презентации предложения. Цену на первом звонке не называем — коммерческую структуру подтверждаем письменно, когда ясен маршрут и объём.</div></div></div>
+      </div>
+      <div class="step">
+        <span class="num">03</span>
+        <h3>Решение до разработки</h3>
+        <p class="brief">В течение 7 рабочих дней — одно из трёх решений от CEO.</p>
+        <ul class="verdict" aria-label="Продолжить, Переработать, Отказать">
+          <li class="ok"><i></i>Продолжить</li><li class="re"><i></i>Переработать</li><li class="no"><i></i>Отказать</li>
+        </ul>
+        <button class="expand" aria-expanded="false" aria-controls="st3">Подробнее <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12"/></svg></button>
+        <div id="st3" class="acc-panel"><div><div class="acc-body">Для нового продукта — внутренняя оценка рынка, продукта и бизнес-логики, которая заканчивается устным решением с обоснованием. Для бизнес-системы — ревизия процессов и годовая дорожная карта. Решение всегда принимает конкретный названный человек.</div></div></div>
+      </div>
+      <div class="step">
+        <span class="num">04</span>
+        <h3>Строим и ведём</h3>
+        <p class="brief">Разработка начинается только после письменных условий.</p>
+        <button class="expand" aria-expanded="false" aria-controls="st4">Подробнее <svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12"/></svg></button>
+        <div id="st4" class="acc-panel"><div><div class="acc-body">Запуск — это только начало и один этап работы; ведение продукта — всё остальное. Мы отвечаем за систему, которую можно эксплуатировать: архитектура, безопасность, работа с данными и кто за что отвечает. Долю в продукте не берём автоматически — только в отдельных партнёрствах и только письменно.</div></div></div>
+      </div>
+    </div>
+    <div class="chain">
+      <p>проверить → структурировать → построить → запустить → вести</p>
+      <a class="link" href="https://logics7.com/ru/how-it-works">Весь процесс шаг за шагом <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- Ответственность -->
+<section class="inverse">
+  <div class="container">
+    <h2 style="max-width:24ch">За что отвечаем и чего не обещаем.</h2>
+    <div class="two">
+      <div>
+        <h3>Отвечаем за</h3>
+        <ul>
+          <li><i>■</i><span>Что логика держится. Проверяем до начала разработки — и если не держится, говорим об этом.</span></li>
+          <li><i>■</i><span>Систему, которую можно эксплуатировать: архитектура, безопасность, данные, кто за что отвечает.</span></li>
+          <li><i>■</i><span>Каждое решение «продолжить / переработать / отказать» принимает названный человек и всегда его обосновывает.</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="no">Не обещаем</h3>
+        <ul>
+          <li><i>□</i><span>Ваш бизнес-результат. Продажи и рост зависят от рынка и от решений, которые остаются вашими.</span></li>
+          <li><i>□</i><span>Одобрение гранта. Готовим заявку; решает грантодатель.</span></li>
+          <li><i>□</i><span>Цену на первом звонке. Коммерческую структуру подтверждаем письменно, когда ясен маршрут и объём.</span></li>
+          <li><i>□</i><span>Часы разработчиков. Берём ответственность за продукт или систему, а не за день работы.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="split" style="margin-bottom:40px">
+      <h2>Вопросы, которые задают первыми.</h2>
+      <p class="lead muted">Пять коротких ответов. Остальные — в <a href="https://logics7.com/ru/faq" style="text-decoration:underline;text-underline-offset:4px">полном FAQ</a>.</p>
+    </div>
+    <div class="acc">
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false" aria-controls="f1"><span class="n">01</span><span class="t">Что такое продуктовый оператор?</span><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12"/></svg></button>
+        <div id="f1" class="acc-panel" role="region"><div><div class="acc-body">Продуктовый оператор решает, что заслуживает существования, строит это для эксплуатации и отвечает за результат: проверить, структурировать, построить, запустить, вести. Никакой разработки без продуктовой логики.</div></div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false" aria-controls="f2"><span class="n">02</span><span class="t">Вы берёте долю автоматически?</span><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12"/></svg></button>
+        <div id="f2" class="acc-panel" role="region"><div><div class="acc-body">Нет. Более глубокое участие может рассматриваться в отдельных партнёрствах Product Partnership и должно быть согласовано письменно. В годовых программах и другой работе, где продукт принадлежит клиенту, права и IP регулируются действующим договором.</div></div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false" aria-controls="f3"><span class="n">03</span><span class="t">Почему не собрать самим в AI-генераторе приложений?</span><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12"/></svg></button>
+        <div id="f3" class="acc-panel" role="region"><div><div class="acc-body">Собирайте — если нужен прототип. Если продукт должен принимать платежи, хранить данные клиентов, связываться с вашими процессами и выдерживать рост, кто-то должен отвечать за архитектуру, безопасность, эксплуатацию и дорожную карту. Именно эту ответственность вы покупаете у продуктового оператора. AI-инструменты в неё уже включены.</div></div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false" aria-controls="f4"><span class="n">04</span><span class="t">Сколько длится оценка?</span><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12"/></svg></button>
+        <div id="f4" class="acc-panel" role="region"><div><div class="acc-body">Internal Validation Assessment занимает до семи рабочих дней и заканчивается устным решением с обоснованием — продолжить, переработать или отказать — до того, как речь зайдёт о разработке.</div></div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-btn" aria-expanded="false" aria-controls="f5"><span class="n">05</span><span class="t">Вы сами используете AI?</span><svg viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12"/></svg></button>
+        <div id="f5" class="acc-panel" role="region"><div><div class="acc-body">Да — в разработке, в производстве контента и в собственном продукте Vendo AI. AI — наша инструментальная база; ответственность — наш продукт.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Фильтр и CTA -->
+<section id="fit" class="surface">
+  <div class="container">
+    <div class="split">
+      <div>
+        <h2>Нам точно не по пути, если…</h2>
+        <p class="muted" style="margin-top:20px">В этих случаях вам лучше подойдёт агентство или AI-генератор приложений. Мы скажем об этом сразу на первом звонке.</p>
+      </div>
+      <ul class="list">
+        <li><span class="n">01</span><span>Вам нужен прототип «на завтра», а дальше трава не расти.</span></li>
+        <li><span class="n">02</span><span>Вы хотите просто покупать дешёвые «часы разработчиков».</span></li>
+        <li><span class="n">03</span><span>Вам нужна слепая разработка по ТЗ, без погружения в бизнес-логику.</span></li>
+        <li><span class="n">04</span><span>Вы ожидаете гарантированный бизнес-результат или гарантированный грант.</span></li>
+        <li><span class="n">05</span><span>Вам нужно самое дешёвое предложение на рынке.</span></li>
+      </ul>
+    </div>
+
+    <div class="cta-box" id="cta">
+      <h2>Готовы обсудить вашу задачу?</h2>
+      <p class="lead muted" style="margin-top:16px;max-width:36em">Ответьте на 5 коротких вопросов, и мы скажем, какой маршрут подойдёт именно вам. Никакой цены, срока или решения — маршрут определяет, какой разговор имеет смысл дальше. Займёт меньше минуты.</p>
+      <div class="row">
+        <button class="btn btn-primary" id="quiz-start" aria-expanded="false" aria-controls="quiz">Пройти квалификацию <span aria-hidden="true">→</span></button>
+        <a href="https://logics7.com/ru/contact" class="btn btn-secondary">Написать через форму</a>
+      </div>
+      <p class="alt">Или напрямую: <a href="mailto:hello@logics7.com">hello@logics7.com</a> · отвечаем в течение одного рабочего дня</p>
+
+      <div class="quiz" id="quiz">
+        <p class="mono" id="quiz-progress">Вопрос 1 из 5</p>
+        <p class="q" id="quiz-q"></p>
+        <ul id="quiz-options"></ul>
+        <div class="foot">
+          <button class="link" id="quiz-back" hidden>← Назад</button>
+          <span class="muted" style="font-size:14px" id="quiz-hint">Выберите вариант, чтобы перейти дальше.</span>
         </div>
-    </section>
-
-    <!-- Экран 2: Статус (Коротко) -->
-    <section class="py-16 bg-brand-black text-white px-6">
-        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-            <div>
-                <h2 class="text-2xl font-bold mb-4">Нам доверяют в регулируемых и высоконагруженных средах.</h2>
-                <p class="text-gray-400">Мы не продаем изолированные "часы разработчиков". Мы берем на себя операционную ответственность.</p>
-            </div>
-            <div class="space-y-4 text-gray-300 border-l border-gray-800 pl-6">
-                <p>— Платформы для иммиграционных сервисов (SRA-регулируемые юр. фирмы).</p>
-                <p>— Автоматизация кредитования (FinTech, кейс NeoFin).</p>
-                <p>— Платформы военной симуляции (L7 Simulators), <strong class="text-white">получившие кодификацию NATO в 2024 году.</strong></p>
-            </div>
+        <div class="result" id="quiz-result" hidden>
+          <p class="mono" style="margin-bottom:8px">Ваш маршрут</p>
+          <h4 id="r-title"></h4>
+          <p id="r-body" class="muted"></p>
+          <div class="row">
+            <a class="btn btn-primary" id="r-link" href="https://logics7.com/ru/contact">Начать разговор — с приложенными ответами <span aria-hidden="true">→</span></a>
+            <button class="link" id="quiz-restart">Начать заново</button>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Экран 3: Маршруты (Детально для Техдира) -->
-    <section class="py-24 px-6 max-w-6xl mx-auto">
-        <div class="mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">Форматы работы (Маршруты)</h2>
-            <p class="text-gray-500 text-lg">Разверните, чтобы изучить технические детали.</p>
-        </div>
+</main>
 
-        <div class="space-y-4">
-            <!-- Аккордеон 1 -->
-            <details class="group bg-white border border-gray-200 p-6 shadow-sm">
-                <summary class="text-xl md:text-2xl font-bold flex justify-between items-center select-none">
-                    01. Product Partnership (Новый продукт)
-                    <svg class="accordion-icon w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </summary>
-                <div class="mt-8 pt-6 border-t border-gray-100 text-gray-700 space-y-6">
-                    <p class="font-medium text-black">Для основателей, инвесторов и владельцев бизнеса, запускающих новый самостоятельный цифровой продукт (идея, прототип или ранняя версия).</p>
-                    <p><strong>Что мы делаем:</strong> Мы оцениваем рыночную, продуктовую и коммерческую логику до перехода к разработке. Если логика держится — мы структурируем правильную первую версию, строим систему, поддерживаем запуск и можем участвовать более глубоко в рамках согласованной структуры партнерства.</p>
-                    <p><strong>Что меняется:</strong> Вы получаете готовое решение до того, как начнете сжигать бюджет на код, и одного ответственного оператора после запуска.</p>
-                </div>
-            </details>
+<footer>
+  <div class="container">
+    <div class="cols">
+      <div>
+        <a href="#top" class="logo" style="color:var(--text)">Logics<b>7</b></a>
+        <p style="margin-top:16px;max-width:360px">Logics7 — продуктовый оператор. Проверяем, структурируем, строим, запускаем и ведём цифровые продукты и бизнес-системы.</p>
+        <p style="margin-top:20px;font-size:13px">LOGICS7 LTD · № компании 14260707 · Зарегистрирована в Англии и Уэльсе<br>Fourth Floor, 4–8 Ludgate Circus, London, EC4M 7LF, United Kingdom</p>
+      </div>
+      <div>
+        <span class="mono">Маршруты</span>
+        <ul>
+          <li><a href="https://logics7.com/ru/product-partnership">Product Partnership</a></li>
+          <li><a href="https://logics7.com/ru/annual-product-operations">Annual Product Operations</a></li>
+          <li><a href="https://logics7.com/ru/existing-product-review">Existing Product Review</a></li>
+          <li><a href="https://logics7.com/ru/funding-and-grant-support">Funding &amp; Grant Support</a></li>
+          <li><a href="https://logics7.com/ru/referral-program">Referral Program</a></li>
+        </ul>
+      </div>
+      <div>
+        <span class="mono">Контакт</span>
+        <ul>
+          <li><a href="https://logics7.com/ru/contact">Начать разговор</a></li>
+          <li><a href="mailto:hello@logics7.com">hello@logics7.com</a></li>
+          <li><a href="https://www.linkedin.com/company/logics7-inc" target="_blank" rel="noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal mono">
+      <span>© 2026 LOGICS7 LTD. Все права защищены.</span>
+      <span>Продуктовый оператор</span>
+    </div>
+  </div>
+</footer>
 
-            <!-- Аккордеон 2 -->
-            <details class="group bg-white border border-gray-200 p-6 shadow-sm">
-                <summary class="text-xl md:text-2xl font-bold flex justify-between items-center select-none">
-                    02. Annual Product Operations (Внутренние системы)
-                    <svg class="accordion-icon w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </summary>
-                <div class="mt-8 pt-6 border-t border-gray-100 text-gray-700 space-y-6">
-                    <p class="font-medium text-black">Для существующих компаний, которым нужны связанные цифровые операции: автоматизация, AI, внутренние инструменты, интеграции.</p>
-                    <p><strong>Ваша ситуация:</strong> Заказы, запросы и отчёты живут в мессенджерах, почте, таблицах и ручных шагах. Бизнес держится на людях и таблицах.</p>
-                    <p><strong>Процесс работы (Roadmap):</strong> Мы начинаем с бизнес-процесса, определяем годовую дорожную карту продукта и автоматизации, а затем выполняем её месячными циклами.</p>
-                    <p><strong>Результат:</strong> Одна связанная система с конкретным владельцем вместо десятка разрозненных инструментов.</p>
-                </div>
-            </details>
+<script>
+// Аккордеоны (все кнопки с aria-controls → панель .acc-panel)
+document.querySelectorAll('[aria-controls]').forEach(function(btn){
+  var panel=document.getElementById(btn.getAttribute('aria-controls'));
+  if(!panel||!panel.classList.contains('acc-panel'))return;
+  panel.setAttribute('aria-hidden','true');
+  btn.addEventListener('click',function(){
+    var open=btn.getAttribute('aria-expanded')==='true';
+    btn.setAttribute('aria-expanded',String(!open));
+    if(open){panel.removeAttribute('data-open');panel.setAttribute('aria-hidden','true');}
+    else{panel.setAttribute('data-open','');panel.setAttribute('aria-hidden','false');}
+  });
+});
 
-            <!-- Аккордеон 3 -->
-            <details class="group bg-white border border-gray-200 p-6 shadow-sm">
-                <summary class="text-xl md:text-2xl font-bold flex justify-between items-center select-none">
-                    03. Existing Product Review & Funding Support
-                    <svg class="accordion-icon w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </summary>
-                <div class="mt-8 pt-6 border-t border-gray-100 text-gray-700 space-y-6">
-                    <p><strong>Existing Product Review:</strong> Для работающего продукта, который остановился в росте, и владельца, готового к партнёру. Включает платный обзор продуктовой логики, позиционирования, UX, монетизации, технологий, аналитики и операций.</p>
-                    <p><strong>Funding & Grant Support:</strong> Подготовка продукта, проходящего грантовый или инвестиционный процесс. Мы формируем объем продукта, дорожную карту, логику бюджета и техническое обоснование (technical narrative).</p>
-                </div>
-            </details>
-        </div>
-    </section>
-
-    <!-- Экран 4: Жизненный цикл (Глубокая экспертиза) -->
-    <section class="py-24 bg-white px-6">
-        <div class="max-w-6xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold mb-12">Один оператор на весь жизненный цикл</h2>
-            <div class="grid md:grid-cols-5 gap-6">
-                <!-- Шаг 1 -->
-                <div class="border-t-2 border-black pt-4">
-                    <div class="text-sm font-bold text-gray-400 mb-2">01</div>
-                    <h3 class="text-lg font-bold mb-2">Validate (Проверка)</h3>
-                    <p class="text-sm text-gray-600">Оценка рынка, пользователя и коммерческой логики до перехода к следующему этапу.</p>
-                </div>
-                <!-- Шаг 2 -->
-                <div class="border-t-2 border-black pt-4">
-                    <div class="text-sm font-bold text-gray-400 mb-2">02</div>
-                    <h3 class="text-lg font-bold mb-2">Structure (Структура)</h3>
-                    <p class="text-sm text-gray-600">Превращение возможности в четкую продуктовую модель, распределение зон ответственности.</p>
-                </div>
-                <!-- Шаг 3 -->
-                <div class="border-t-2 border-black pt-4">
-                    <div class="text-sm font-bold text-gray-400 mb-2">03</div>
-                    <h3 class="text-lg font-bold mb-2">Build (Разработка)</h3>
-                    <p class="text-sm text-gray-600">Координация инженерии, дизайна, AI, автоматизации и контроля качества как единой системы.</p>
-                </div>
-                <!-- Шаг 4 -->
-                <div class="border-t-2 border-black pt-4">
-                    <div class="text-sm font-bold text-gray-400 mb-2">04</div>
-                    <h3 class="text-lg font-bold mb-2">Launch (Запуск)</h3>
-                    <p class="text-sm text-gray-600">Переход от рабочего продукта к контролируемому релизу с настроенной аналитикой.</p>
-                </div>
-                <!-- Шаг 5 -->
-                <div class="border-t-2 border-black pt-4">
-                    <div class="text-sm font-bold text-gray-400 mb-2">05</div>
-                    <h3 class="text-lg font-bold mb-2">Operate (Ведение)</h3>
-                    <p class="text-sm text-gray-600">Улучшение продукта через непрерывное выполнение и сбор операционной обратной связи.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Экран 5: Почему не просто AI/Кодеры (Сравнительная таблица) -->
-    <section class="py-24 px-6 max-w-6xl mx-auto">
-        <details class="group bg-gray-100 p-8">
-            <summary class="text-2xl font-bold flex justify-between items-center select-none">
-                Сравнение: AI-конструкторы vs Logics7
-                <svg class="accordion-icon w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-            </summary>
-            <div class="mt-8 overflow-x-auto">
-                <p class="mb-6 text-gray-700 max-w-3xl">AI-платформы и кодовые агенты могут собрать приложение за несколько часов. Инструмент даёт вам прототип. Но никто внутри него не отвечает за бизнес-логику, безопасность и то, что будет после запуска. Это работа продуктового оператора.</p>
-                <table class="w-full text-left border-collapse min-w-[800px]">
-                    <thead>
-                        <tr class="border-b border-gray-300">
-                            <th class="py-4 pr-4 font-bold">Вариант</th>
-                            <th class="py-4 px-4 font-bold text-sm text-gray-500">Проверка</th>
-                            <th class="py-4 px-4 font-bold text-sm text-gray-500">Структура</th>
-                            <th class="py-4 px-4 font-bold text-sm text-gray-500">Разработка</th>
-                            <th class="py-4 px-4 font-bold text-sm text-gray-500">Запуск</th>
-                            <th class="py-4 pl-4 font-bold text-sm text-gray-500">Ведение</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-sm">
-                        <tr class="border-b border-gray-200">
-                            <td class="py-4 pr-4 font-medium">AI-конструкторы (прототип)</td>
-                            <td class="py-4 px-4 text-gray-400">Не входит</td>
-                            <td class="py-4 px-4 text-gray-400">Не входит</td>
-                            <td class="py-4 px-4">Частично</td>
-                            <td class="py-4 px-4">По запросу</td>
-                            <td class="py-4 pl-4 text-gray-400">Не входит</td>
-                        </tr>
-                        <tr class="bg-white">
-                            <td class="py-4 pr-4 font-bold">Logics7 (Продуктовый оператор)</td>
-                            <td class="py-4 px-4 font-medium">Включено</td>
-                            <td class="py-4 px-4 font-medium">Включено</td>
-                            <td class="py-4 px-4 font-medium">Включено</td>
-                            <td class="py-4 px-4 font-medium">Включено</td>
-                            <td class="py-4 pl-4 font-medium">Включено</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </details>
-    </section>
-
-    <!-- Экран 6: Контакты и Процесс -->
-    <section id="contact" class="py-24 bg-brand-black text-white px-6">
-        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-16">
-            <div>
-                <h2 class="text-3xl font-bold mb-8">Начать разговор. <br> Без слепой разработки.</h2>
-                <div class="space-y-6 text-gray-400 text-sm">
-                    <p><strong class="text-white block text-base mb-1">01. Напишите нам</strong> Мы отвечаем в течение 1 рабочего дня и говорим, какой формат подходит, ДО того, как кто-то заговорит об объемах.</p>
-                    <p><strong class="text-white block text-base mb-1">02. 30-минутный разговор</strong> Мы расспрашиваем о вашей ситуации. Мы не продаем. "Если это не будет работать, я лучше скажу об этом на первом звонке, чем возьмусь это строить".</p>
-                    <p><strong class="text-white block text-base mb-1">03. Решение до разработки</strong> Оценка до 7 рабочих дней заканчивается решением: Продолжить, Переработать или Отказать.</p>
-                </div>
-            </div>
-            <div class="bg-brand-gray p-8 border border-gray-800">
-                <h3 class="text-xl font-bold mb-6">Над чем вы работаете?</h3>
-                <form class="space-y-4">
-                    <label class="flex items-start space-x-3 cursor-pointer">
-                        <input type="checkbox" class="mt-1 bg-black border-gray-600 rounded">
-                        <span class="text-sm text-gray-300">Новый самостоятельный цифровой продукт (идея, прототип)</span>
-                    </label>
-                    <label class="flex items-start space-x-3 cursor-pointer">
-                        <input type="checkbox" class="mt-1 bg-black border-gray-600 rounded">
-                        <span class="text-sm text-gray-300">Связанные цифровые операции: автоматизация, внутренние инструменты</span>
-                    </label>
-                    <label class="flex items-start space-x-3 cursor-pointer">
-                        <input type="checkbox" class="mt-1 bg-black border-gray-600 rounded">
-                        <span class="text-sm text-gray-300">Работающий продукт, который остановился в росте</span>
-                    </label>
-                    <button type="button" class="mt-6 w-full bg-white text-black font-bold py-3 hover:bg-gray-200 transition">
-                        Связаться
-                    </button>
-                </form>
-                <p class="mt-6 text-sm text-gray-500 text-center">
-                    Или напишите напрямую: <a href="mailto:hello@logics7.com" class="text-white underline">hello@logics7.com</a>
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Футер с юр. данными -->
-    <footer class="bg-black py-12 text-gray-500 text-xs px-6 border-t border-gray-900">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-            <div>
-                <p>LOGICS7 LTD. Компания № 14260707. Зарегистрирована в Англии и Уэльсе.</p>
-                <p>Юридический адрес: Fourth Floor, 4–8 Ludgate Circus, London, EC4M 7LF, United Kingdom.</p>
-            </div>
-            <div>
-                <p>&copy; 2026 Logics7. Все права защищены.</p>
-            </div>
-        </div>
-    </footer>
-
+// Квиз маршрута (5 вопросов, как на logics7.com)
+(function(){
+  var Q=[
+    {q:'Над чем вы работаете?',o:['Новый самостоятельный цифровой продукт — идея, прототип или ранняя версия.','Существующий бизнес, которому нужна связанная цифровая система: автоматизация, внутренние инструменты, интеграции.','Живой продукт, который стагнирует и которому нужен партнёр для роста.','Цифровой продукт, который проходит грантовый отбор или процесс финансирования.','Хочу представить компанию, которой нужен Logics7.']},
+    {q:'Где это сейчас?',o:['Идея и первые размышления','Прототип или MVP','Живой продукт с реальными пользователями','Устоявшийся бизнес, процессы держатся на людях и таблицах']},
+    {q:'Какое решение вам предстоит следующим?',o:['Стоит ли это вообще строить','Как это структурировать и финансировать','Кто должен построить и вести','Как исправить или улучшить то, что уже есть','Как сделать, чтобы наши процессы работали как одна система']},
+    {q:'Кто принимает решение — и когда?',o:['Решаю я, в течение месяца','Решаю с партнёрами или советом, 1–3 месяца','Изучаю вопрос от имени компании, позже в этом году']},
+    {q:'Что у вас уже есть?',o:['Письменная спецификация или материалы','Определённый бюджет','Собранная команда','Пока ничего — поэтому я здесь']}
+  ];
+  var R={
+    0:{t:'Product Partnership',b:'Для нового продукта Logics7 сначала проверяет, оправдывает ли рыночная, продуктовая и коммерческая логика следующий этап: 30-минутный разговор → внутренняя оценка до 7 рабочих дней → ясное решение: продолжить, переработать или отказать. Разработка никогда не начинается автоматически.',l:'https://logics7.com/ru/product-partnership'},
+    1:{t:'Annual Product Operations',b:'Начинаем с бизнес-процесса, а не с инструмента: 30-минутный разговор → разбор контекста процессов → Prepared Offer Meeting с коммерческим направлением для этого маршрута.',l:'https://logics7.com/ru/annual-product-operations'},
+    2:{t:'Existing Product Review',b:'Оцениваем код, бизнес-логику и рынок той же проверкой, что и новое партнёрство: письменно согласованный доступ → ревью → решение на Leadership Gate с обоснованием → если «да», переговоры о партнёрстве.',l:'https://logics7.com/ru/existing-product-review'},
+    3:{t:'Funding & Grant Support',b:'Переводим продуктовую логику в связный объём работ, дорожную карту, обоснование бюджета и вехи: разговор → проверка готовности → Prepared Offer Meeting. Одобрение гранта не гарантируем.',l:'https://logics7.com/ru/funding-and-grant-support'},
+    4:{t:'Referral Program',b:'Квалифицированные профессиональные рекомендации — не партнёрская программа: подтверждаем компанию, ЛПР и запрос → письменные условия там, где уместно → само знакомство.',l:'https://logics7.com/ru/referral-program'}
+  };
+  var i=0,ans=[];
+  var quiz=document.getElementById('quiz'),start=document.getElementById('quiz-start'),
+      prog=document.getElementById('quiz-progress'),qEl=document.getElementById('quiz-q'),
+      opts=document.getElementById('quiz-options'),back=document.getElementById('quiz-back'),
+      hint=document.getElementById('quiz-hint'),res=document.getElementById('quiz-result');
+  function render(){
+    if(i>=Q.length){show();return;}
+    res.hidden=true;prog.hidden=false;qEl.hidden=false;opts.hidden=false;hint.hidden=false;
+    prog.textContent='Вопрос '+(i+1)+' из '+Q.length;qEl.textContent=Q[i].q;opts.innerHTML='';
+    Q[i].o.forEach(function(text,k){
+      var li=document.createElement('li'),b=document.createElement('button');
+      b.type='button';b.setAttribute('aria-pressed',String(ans[i]===k));
+      b.innerHTML='<span class="box">'+(ans[i]===k?'■':'□')+'</span><span>'+text+'</span>';
+      b.addEventListener('click',function(){ans[i]=k;i++;render();});
+      li.appendChild(b);opts.appendChild(li);
+    });
+    back.hidden=i===0;
+  }
+  function show(){
+    var r=R[ans[0]]||R[0];
+    prog.hidden=true;qEl.hidden=true;opts.hidden=true;hint.hidden=true;back.hidden=true;
+    document.getElementById('r-title').textContent='Ваш маршрут: '+r.t+'.';
+    document.getElementById('r-body').textContent=r.b;
+    document.getElementById('r-link').href='https://logics7.com/ru/contact';
+    res.hidden=false;
+  }
+  start.addEventListener('click',function(){
+    quiz.setAttribute('data-open','');start.setAttribute('aria-expanded','true');
+    i=0;ans=[];render();quiz.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+  back.addEventListener('click',function(){if(i>0){i--;render();}});
+  document.getElementById('quiz-restart').addEventListener('click',function(){i=0;ans=[];render();});
+})();
+</script>
 </body>
 </html>
